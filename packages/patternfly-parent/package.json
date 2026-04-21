@@ -1,0 +1,70 @@
+{
+  "name": "@tailwind-patternfly/patternfly-parent",
+  "version": "0.0.0",
+  "description": "React serverless workflow diagram component",
+  "keywords": [],
+  "homepage": "https://github.com/serverlessworkflow/editor",
+  "bugs": {
+    "url": "https://github.com/serverlessworkflow/editor/issues"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/serverlessworkflow/editor.git"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "clean": "rimraf ./dist",
+    "build:dev": "pnpm clean && vite build",
+    "build:prod": "pnpm lint && pnpm clean && vite build && pnpm test",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint --config .oxlintrc.json src/ stories/ tests/",
+    "format": "oxfmt --config .oxfmtrc.json",
+    "format:check": "oxfmt --config .oxfmtrc.json --check",
+    "test": "vitest run --passWithNoTests",
+    "start": "vite",
+    "build:storybook": "pnpm clean:storybook && storybook build --output-dir ./dist-storybook"
+  },
+  "dependencies": {
+    "@tailwind-patternfly/tailwind-child": "workspace:*",
+    "@heroicons/react": "catalog:",
+    "@patternfly/react-core": "catalog:",
+    "@patternfly/react-icons": "catalog:",
+    "@serverlessworkflow/sdk": "catalog:",
+    "@xyflow/react": "catalog:",
+    "js-yaml": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "catalog:",
+    "@storybook/addon-a11y": "catalog:",
+    "@storybook/addon-docs": "catalog:",
+    "@storybook/addon-vitest": "catalog:",
+    "@storybook/react-vite": "catalog:",
+    "@testing-library/dom": "catalog:",
+    "@testing-library/jest-dom": "catalog:",
+    "@testing-library/react": "catalog:",
+    "@testing-library/user-event": "catalog:",
+    "@types/js-yaml": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "@vitest/ui": "catalog:",
+    "jsdom": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
+    "rimraf": "catalog:",
+    "storybook": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  }
+}

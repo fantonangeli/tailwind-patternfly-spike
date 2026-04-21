@@ -1,0 +1,11 @@
+{
+  "$schema": "https://oxc.rs/schema/oxlintrc.json",
+  "plugins": ["react", "typescript", "import", "jsx-a11y"],
+  "rules": {
+    "jsx-a11y/alt-text": "off",
+    "react/react-in-jsx-scope": "off",
+    "typescript/no-unused-vars": ["warn", { "varsIgnorePattern": "^_" }],
+    "typescript/no-explicit-any": "warn"
+  },
+  "ignorePatterns": ["**/dist/", "**/dist-storybook/", "**/node_modules/"]
+}
