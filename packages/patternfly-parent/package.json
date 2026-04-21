@@ -33,11 +33,11 @@
     "build:storybook": "pnpm clean:storybook && storybook build --output-dir ./dist-storybook"
   },
   "dependencies": {
-    "@tailwind-patternfly/tailwind-child": "workspace:*",
     "@heroicons/react": "catalog:",
     "@patternfly/react-core": "catalog:",
     "@patternfly/react-icons": "catalog:",
     "@serverlessworkflow/sdk": "catalog:",
+    "@tailwind-patternfly/tailwind-child": "workspace:*",
     "@xyflow/react": "catalog:",
     "js-yaml": "catalog:",
     "react": "catalog:",

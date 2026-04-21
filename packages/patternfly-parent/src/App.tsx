@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
+import "@tailwind-patternfly/tailwind-child/dist/tailwind-child.css";
 import "@patternfly/react-core/dist/styles/base.css";
-import './fonts.css';
+import "./fonts.css";
 
-import { cloneElement, Fragment, JSX, useCallback, useEffect, useRef, useState } from 'react';
+import { cloneElement, Fragment, JSX, useCallback, useEffect, useRef, useState } from "react";
 import {
   Avatar,
   Brand,
@@ -66,16 +67,17 @@ import {
   MenuGroup,
   MenuSearchInput,
   SearchInput,
-  Tooltip
-} from '@patternfly/react-core';
-import EllipsisVIcon from '@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon';
-import CogIcon from '@patternfly/react-icons/dist/esm/icons/cog-icon';
-import HelpIcon from '@patternfly/react-icons/dist/esm/icons/help-icon';
-import ThIcon from '@patternfly/react-icons/dist/esm/icons/th-icon';
-import QuestionCircleIcon from '@patternfly/react-icons/dist/esm/icons/question-circle-icon';
-const imgAvatar = "https://github.com/patternfly/patternfly-react/raw/main/packages/react-core/src/demos/@patternfly/react-core/src/components/assets/avatarImg.svg";
-const pfIcon = "https://github.com/patternfly/patternfly-react/raw/main/packages/react-core/src/demos/@patternfly/react-core/src/demos/assets/pf-logo-small.svg";
-const pfLogo = "https://github.com/patternfly/patternfly-react/raw/main/packages/react-core/src/demos/@patternfly/react-core/src/demos/assets/PF-HorizontalLogo-Color.svg";
+  Tooltip,
+} from "@patternfly/react-core";
+import EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon";
+import CogIcon from "@patternfly/react-icons/dist/esm/icons/cog-icon";
+import HelpIcon from "@patternfly/react-icons/dist/esm/icons/help-icon";
+import ThIcon from "@patternfly/react-icons/dist/esm/icons/th-icon";
+import QuestionCircleIcon from "@patternfly/react-icons/dist/esm/icons/question-circle-icon";
+import { FeatureSelection } from "@tailwind-patternfly/tailwind-child";
+import imgAvatar from "@patternfly/react-core/src/components/assets/avatarImg.svg";
+import pfIcon from "@patternfly/react-core/src/demos/assets/pf-logo-small.svg";
+import pfLogo from "@patternfly/react-core/src/demos/assets/PF-HorizontalLogo-Color.svg";
 
 interface NavOnSelectProps {
   groupId: number | string;
@@ -83,6 +85,7 @@ interface NavOnSelectProps {
   to: string;
 }
 
+// Original at: https://www.patternfly.org/components/masthead/react-demos/
 export const PatternflyParentApp: React.FunctionComponent = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isKebabDropdownOpen, setIsKebabDropdownOpen] = useState(false);
@@ -92,13 +95,16 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [refFullOptions, setRefFullOptions] = useState<Element[]>();
   const [favorites, setFavorites] = useState<string[]>([]);
-  const [filteredIds, setFilteredIds] = useState<string[]>(['*']);
-  const [searchValue, setSearchValue] = useState('');
+  const [filteredIds, setFilteredIds] = useState<string[]>(["*"]);
+  const [searchValue, setSearchValue] = useState("");
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
-  const onNavSelect = (_event: React.FormEvent<HTMLInputElement>, selectedItem: NavOnSelectProps) => {
-    if (typeof selectedItem.itemId === 'number') {
+  const onNavSelect = (
+    _event: React.FormEvent<HTMLInputElement>,
+    selectedItem: NavOnSelectProps,
+  ) => {
+    if (typeof selectedItem.itemId === "number") {
       setActiveItem(selectedItem.itemId);
     }
   };
@@ -127,47 +133,58 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
     setIsFullKebabDropdownOpen(!isFullKebabDropdownOpen);
   };
 
-  const handleMenuKeys = useCallback((event: KeyboardEvent) => {
-    if (!isOpen) {
-      return;
-    }
-    if (menuRef.current?.contains(event.target as Node) || toggleRef.current?.contains(event.target as Node)) {
-      if (event.key === 'Escape') {
-        setIsOpen(!isOpen);
-        toggleRef.current?.focus();
+  const handleMenuKeys = useCallback(
+    (event: KeyboardEvent) => {
+      if (!isOpen) {
+        return;
       }
-    }
-  }, [isOpen]);
+      if (
+        menuRef.current?.contains(event.target as Node) ||
+        toggleRef.current?.contains(event.target as Node)
+      ) {
+        if (event.key === "Escape") {
+          setIsOpen(!isOpen);
+          toggleRef.current?.focus();
+        }
+      }
+    },
+    [isOpen],
+  );
 
-  const handleClickOutside = useCallback((event: MouseEvent) => {
-    if (isOpen && !menuRef.current?.contains(event.target as Node)) {
-      setIsOpen(false);
-    }
-  }, [isOpen]);
+  const handleClickOutside = useCallback(
+    (event: MouseEvent) => {
+      if (isOpen && !menuRef.current?.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    },
+    [isOpen],
+  );
 
   const onToggleClick = (ev: React.MouseEvent) => {
     ev.stopPropagation(); // Stop handleClickOutside from handling
     setTimeout(() => {
       if (menuRef.current) {
         const firstElement = menuRef.current.querySelector(
-          'li > button:not(:disabled), li > a:not(:disabled), input:not(:disabled)'
+          "li > button:not(:disabled), li > a:not(:disabled), input:not(:disabled)",
         );
         if (firstElement) {
           (firstElement as HTMLElement).focus();
         }
-        setRefFullOptions(Array.from(menuRef.current.querySelectorAll('li:not(li[role=separator])>*:first-child')));
+        setRefFullOptions(
+          Array.from(menuRef.current.querySelectorAll("li:not(li[role=separator])>*:first-child")),
+        );
       }
     }, 0);
     setIsOpen(!isOpen);
   };
 
   useEffect(() => {
-    window.addEventListener('keydown', handleMenuKeys);
-    window.addEventListener('click', handleClickOutside);
+    window.addEventListener("keydown", handleMenuKeys);
+    window.addEventListener("click", handleClickOutside);
 
     return () => {
-      window.removeEventListener('keydown', handleMenuKeys);
-      window.removeEventListener('click', handleClickOutside);
+      window.removeEventListener("keydown", handleMenuKeys);
+      window.removeEventListener("click", handleClickOutside);
     };
   }, [isOpen, handleMenuKeys, handleClickOutside]);
 
@@ -178,7 +195,7 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
       variant="plain"
       onClick={onToggleClick}
       isExpanded={isOpen}
-      style={{ width: 'auto' }}
+      style={{ width: "auto" }}
       icon={<ThIcon />}
     />
   );
@@ -186,13 +203,13 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
   const menuItems = [
     <MenuGroup key="group1" label="Group 1">
       <MenuList>
-        <MenuItem itemId="0" id="0" isFavorited={favorites.includes('0')}>
+        <MenuItem itemId="0" id="0" isFavorited={favorites.includes("0")}>
           Application 1
         </MenuItem>
         <MenuItem
           itemId="1"
           id="1"
-          isFavorited={favorites.includes('1')}
+          isFavorited={favorites.includes("1")}
           to="#default-link2"
           onClick={(ev) => ev.preventDefault()}
         >
@@ -206,7 +223,7 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
         <MenuItem
           itemId="2"
           id="2"
-          isFavorited={favorites.includes('2')}
+          isFavorited={favorites.includes("2")}
           to="#default-link3"
           onClick={(ev) => ev.preventDefault()}
         >
@@ -215,7 +232,7 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
         <MenuItem
           itemId="3"
           id="3"
-          isFavorited={favorites.includes('3')}
+          isFavorited={favorites.includes("3")}
           isExternalLink
           icon={<img src={pfIcon} />}
           to="#default-link4"
@@ -227,7 +244,7 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
     </MenuGroup>,
     <Divider key="group2-divider" />,
     <MenuList key="other-items">
-      <MenuItem key="tooltip-app" isFavorited={favorites.includes('4')} itemId="4" id="4">
+      <MenuItem key="tooltip-app" isFavorited={favorites.includes("4")} itemId="4" id="4">
         <Tooltip content={<div>Launch Application 4</div>} position="right">
           <span>Application 4 with tooltip</span>
         </Tooltip>
@@ -235,7 +252,7 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
       <MenuItem key="disabled-app" itemId="5" id="5" isDisabled>
         Unavailable Application
       </MenuItem>
-    </MenuList>
+    </MenuList>,
   ];
 
   const createFavorites = (favIds: string[]) => {
@@ -265,7 +282,7 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
   };
 
   const filterItems = (items: JSX.Element[], filteredIds: string[]) => {
-    if (filteredIds.length === 1 && filteredIds[0] === '*') {
+    if (filteredIds.length === 1 && filteredIds[0] === "*") {
       return items;
     }
     let keepDivider = false;
@@ -278,8 +295,8 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
                 if (filteredIds.includes(child.props.itemId)) {
                   return child;
                 }
-              })
-            })
+              }),
+            }),
           });
           const filteredList = filteredGroup.props.children;
           if (filteredList.props.children.length > 0) {
@@ -294,7 +311,7 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
               if (filteredIds.includes(child.props.itemId)) {
                 return child;
               }
-            })
+            }),
           });
           if (filteredGroup.props.children.length > 0) {
             keepDivider = true;
@@ -322,21 +339,25 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
 
   const onTextChange = (textValue: string) => {
     setSearchValue(textValue);
-    if (textValue === '') {
-      setFilteredIds(['*']);
+    if (textValue === "") {
+      setFilteredIds(["*"]);
       return;
     }
 
     const filteredIds =
       refFullOptions
-        ?.filter((item) => (item as HTMLElement).innerText.toLowerCase().includes(textValue.toString().toLowerCase()))
+        ?.filter((item) =>
+          (item as HTMLElement).innerText
+            .toLowerCase()
+            .includes(textValue.toString().toLowerCase()),
+        )
         .map((item) => item.id) || [];
     setFilteredIds(filteredIds);
   };
 
   const onFavorite = (event: React.MouseEvent, itemId: string, actionId: string) => {
     event.stopPropagation();
-    if (actionId === 'fav') {
+    if (actionId === "fav") {
       const isFavorite = favorites.includes(itemId);
       if (isFavorite) {
         setFavorites(favorites.filter((fav) => fav !== itemId));
@@ -354,7 +375,11 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
 
   const menu = (
     // eslint-disable-next-line no-console
-    <Menu ref={menuRef} onActionClick={onFavorite} onSelect={(_ev, itemId) => console.log('selected', itemId)}>
+    <Menu
+      ref={menuRef}
+      onActionClick={onFavorite}
+      onSelect={(_ev, itemId) => console.log("selected", itemId)}
+    >
       <MenuSearchInput>
         <SearchInput
           aria-label="Filter menu items"
@@ -362,7 +387,7 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
           onChange={(_event, value) => onTextChange(value)}
           onClear={(event) => {
             event.stopPropagation();
-            onTextChange('');
+            onTextChange("");
           }}
         />
       </MenuSearchInput>
@@ -407,7 +432,7 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
       <DropdownItem key="group 2 profile">My profile</DropdownItem>
       <DropdownItem key="group 2 user">User management</DropdownItem>
       <DropdownItem key="group 2 logout">Logout</DropdownItem>
-    </>
+    </>,
   ];
 
   const headerToolbar = (
@@ -415,29 +440,46 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
       <ToolbarContent>
         <ToolbarGroup
           variant="action-group-plain"
-          align={{ default: 'alignEnd' }}
-          gap={{ default: 'gapNone', md: 'gapMd' }}
+          align={{ default: "alignEnd" }}
+          gap={{ default: "gapNone", md: "gapMd" }}
         >
           <ToolbarItem>
-            <NotificationBadge aria-label="Notifications" variant={NotificationBadgeVariant.read} onClick={() => {}} />
+            <NotificationBadge
+              aria-label="Notifications"
+              variant={NotificationBadgeVariant.read}
+              onClick={() => {}}
+            />
           </ToolbarItem>
-          <ToolbarGroup variant="action-group-plain" visibility={{ default: 'hidden', lg: 'visible' }}>
-            <ToolbarItem visibility={{ default: 'hidden', md: 'hidden', lg: 'visible' }}>
-              <Popper trigger={toggle} triggerRef={toggleRef} popper={menu} popperRef={menuRef} isVisible={isOpen} />
+          <ToolbarGroup
+            variant="action-group-plain"
+            visibility={{ default: "hidden", lg: "visible" }}
+          >
+            <ToolbarItem visibility={{ default: "hidden", md: "hidden", lg: "visible" }}>
+              <Popper
+                trigger={toggle}
+                triggerRef={toggleRef}
+                popper={menu}
+                popperRef={menuRef}
+                isVisible={isOpen}
+              />
             </ToolbarItem>
             <ToolbarItem>
               <Button aria-label="Settings" isSettings variant="plain" />
             </ToolbarItem>
             <ToolbarItem>
-              <Button aria-label="Help" variant={ButtonVariant.plain} icon={<QuestionCircleIcon />} />
+              <Button
+                aria-label="Help"
+                variant={ButtonVariant.plain}
+                icon={<QuestionCircleIcon />}
+              />
             </ToolbarItem>
           </ToolbarGroup>
-          <ToolbarItem visibility={{ default: 'hidden', md: 'visible', lg: 'hidden' }}>
+          <ToolbarItem visibility={{ default: "hidden", md: "visible", lg: "hidden" }}>
             <Dropdown
               isOpen={isKebabDropdownOpen}
               onSelect={onKebabDropdownSelect}
               onOpenChange={(isOpen: boolean) => setIsKebabDropdownOpen(isOpen)}
-              popperProps={{ position: 'right' }}
+              popperProps={{ position: "right" }}
               toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
                 <MenuToggle
                   ref={toggleRef}
@@ -452,12 +494,12 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
               <DropdownList>{kebabDropdownItems}</DropdownList>
             </Dropdown>
           </ToolbarItem>
-          <ToolbarItem visibility={{ md: 'hidden' }}>
+          <ToolbarItem visibility={{ md: "hidden" }}>
             <Dropdown
               isOpen={isFullKebabDropdownOpen}
               onSelect={onFullKebabDropdownSelect}
               onOpenChange={(isOpen: boolean) => setIsFullKebabDropdownOpen(isOpen)}
-              popperProps={{ position: 'right' }}
+              popperProps={{ position: "right" }}
               toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
                 <MenuToggle
                   ref={toggleRef}
@@ -477,12 +519,12 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
             </Dropdown>
           </ToolbarItem>
         </ToolbarGroup>
-        <ToolbarItem visibility={{ default: 'hidden', md: 'visible' }}>
+        <ToolbarItem visibility={{ default: "hidden", md: "visible" }}>
           <Dropdown
             isOpen={isDropdownOpen}
             onSelect={onDropdownSelect}
             onOpenChange={(isOpen: boolean) => setIsDropdownOpen(isOpen)}
-            popperProps={{ position: 'right' }}
+            popperProps={{ position: "right" }}
             toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
               <MenuToggle
                 ref={toggleRef}
@@ -509,7 +551,7 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
         </MastheadToggle>
         <MastheadBrand>
           <MastheadLogo>
-            <Brand src={pfLogo} alt="PatternFly" heights={{ default: '36px' }} />
+            <Brand src={pfLogo} alt="PatternFly" heights={{ default: "36px" }} />
           </MastheadLogo>
         </MastheadBrand>
       </MastheadMain>
@@ -545,7 +587,7 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
     </PageSidebar>
   );
 
-  const mainContainerId = 'main-content-page-layout-tertiary-nav';
+  const mainContainerId = "main-content-page-layout-tertiary-nav";
 
   const handleClick = (event) => {
     event.preventDefault();
@@ -592,6 +634,12 @@ export const PatternflyParentApp: React.FunctionComponent = () => {
             </GalleryItem>
           ))}
         </Gallery>
+      </PageSection>
+      <PageSection aria-label="Tailwind Component">
+        <Content>
+          <h2>Tailwind Component</h2>
+        </Content>
+        <FeatureSelection />
       </PageSection>
     </Page>
   );

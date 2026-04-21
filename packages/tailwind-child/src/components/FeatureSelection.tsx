@@ -14,35 +14,41 @@
  * limitations under the License.
  */
 
+import "./FeatureSelection.css";
 import * as React from "react";
-import { ArrowPathIcon, CloudArrowUpIcon, FingerPrintIcon, LockClosedIcon } from '@heroicons/react/24/outline'
+import {
+  ArrowPathIcon,
+  CloudArrowUpIcon,
+  FingerPrintIcon,
+  LockClosedIcon,
+} from "@heroicons/react/24/outline";
 
 const features = [
   {
-    name: 'Push to deploy',
+    name: "Push to deploy",
     description:
-      'Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.',
+      "Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.",
     icon: CloudArrowUpIcon,
   },
   {
-    name: 'SSL certificates',
+    name: "SSL certificates",
     description:
-      'Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.',
+      "Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.",
     icon: LockClosedIcon,
   },
   {
-    name: 'Simple queues',
+    name: "Simple queues",
     description:
-      'Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.',
+      "Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.",
     icon: ArrowPathIcon,
   },
   {
-    name: 'Advanced security',
+    name: "Advanced security",
     description:
-      'Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.',
+      "Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.",
     icon: FingerPrintIcon,
   },
-]
+];
 
 // Original component: https://tailwindcss.com/plus/ui-blocks/marketing/sections/feature-sections#component-64ac58e032276db96bf343a8d4f332a8
 export const FeatureSelection = () => {
@@ -55,8 +61,8 @@ export const FeatureSelection = () => {
             Everything you need to deploy your app
           </p>
           <p className="mt-6 text-lg/8 text-gray-700">
-            Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum
-            pulvinar et feugiat blandit at. In mi viverra elit nunc.
+            Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget
+            egestas a elementum pulvinar et feugiat blandit at. In mi viverra elit nunc.
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
@@ -76,5 +82,5 @@ export const FeatureSelection = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

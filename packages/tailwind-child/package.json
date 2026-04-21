@@ -22,7 +22,8 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
-    }
+    },
+    "./dist/tailwind-child.css": "./dist/tailwind-child.css"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
