@@ -14,4 +14,58 @@
  * limitations under the License.
  */
 
-@import "tailwindcss";
+@import "tailwindcss" prefix(dec);
+
+/*
+ * Child-level style overrides scoped to .dec-root wrapper.
+ * These only apply inside the child's wrapper div, preventing leakage to the parent.
+ */
+
+/* Scoped font override */
+.dec-root {
+  font-family: "Georgia", "Times New Roman", serif;
+  color: #1a1a2e;
+}
+
+
+/* Give all headings a visible bottom border and custom color */
+.dec-root h1, .dec-root h2, .dec-root h3, .dec-root h4, .dec-root h5, .dec-root h6 {
+  border-bottom: 2px solid #e74c3c;
+  padding-bottom: 4px;
+  margin-bottom: 12px;
+  color: #8e44ad;
+  font-family: "Georgia", "Times New Roman", serif;
+}
+
+/* Make all paragraphs have visible left border and italic */
+.dec-root p {
+  border-left: 3px solid #3498db;
+  padding-left: 10px;
+  font-style: italic;
+  line-height: 1.8;
+}
+
+/* Style definition terms and descriptions */
+.dec-root dt {
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #8e44ad;
+}
+
+.dec-root dd {
+  margin-left: 20px;
+  color: #7f8c8d;
+  font-size: 0.85rem;
+}
+
+/* Override div backgrounds */
+.dec-root div {
+  border-radius: 0;
+}
+
+/* Make all SVGs have a visible red outline */
+.dec-root svg {
+  outline: 2px dashed #e74c3c;
+  outline-offset: 2px;
+}

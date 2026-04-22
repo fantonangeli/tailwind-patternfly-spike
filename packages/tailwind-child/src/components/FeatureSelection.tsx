@@ -53,32 +53,36 @@ const features = [
 // Original component: https://tailwindcss.com/plus/ui-blocks/marketing/sections/feature-sections#component-64ac58e032276db96bf343a8d4f332a8
 export const FeatureSelection = () => {
   return (
-    <div className="bg-white py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl lg:text-center">
-          <h2 className="text-base/7 font-semibold text-indigo-600">Deploy faster</h2>
-          <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl lg:text-balance">
-            Everything you need to deploy your app
-          </p>
-          <p className="mt-6 text-lg/8 text-gray-700">
-            Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget
-            egestas a elementum pulvinar et feugiat blandit at. In mi viverra elit nunc.
-          </p>
-        </div>
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-            {features.map((feature) => (
-              <div key={feature.name} className="relative pl-16">
-                <dt className="text-base/7 font-semibold text-gray-900">
-                  <div className="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-indigo-600">
-                    <feature.icon aria-hidden="true" className="size-6 text-white" />
-                  </div>
-                  {feature.name}
-                </dt>
-                <dd className="mt-2 text-base/7 text-gray-600">{feature.description}</dd>
-              </div>
-            ))}
-          </dl>
+    <div className="dec-root">
+      <div className="dec:bg-white dec:py-24 sm:dec:py-32">
+        <div className="dec:mx-auto dec:max-w-7xl dec:px-6 lg:dec:px-8">
+          <div className="dec:mx-auto dec:max-w-2xl lg:dec:text-center">
+            <h2 className="dec:text-base/7 dec:font-semibold dec:text-indigo-600">Deploy faster</h2>
+            <p className="dec:mt-2 dec:text-4xl dec:font-semibold dec:tracking-tight dec:text-pretty dec:text-gray-900 sm:dec:text-5xl lg:dec:text-balance">
+              Everything you need to deploy your app
+            </p>
+            <p className="dec:mt-6 dec:text-lg/8 dec:text-gray-700">
+              Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget
+              egestas a elementum pulvinar et feugiat blandit at. In mi viverra elit nunc.
+            </p>
+          </div>
+          <div className="dec:mx-auto dec:mt-16 dec:max-w-2xl sm:dec:mt-20 lg:dec:mt-24 lg:dec:max-w-4xl">
+            <dl className="dec:grid dec:max-w-xl dec:grid-cols-1 dec:gap-x-8 dec:gap-y-10 lg:dec:max-w-none lg:dec:grid-cols-2 lg:dec:gap-y-16">
+              {features.map((feature) => (
+                <div key={feature.name} className="dec:relative dec:pl-16">
+                  <dt className="dec:text-base/7 dec:font-semibold dec:text-gray-900">
+                    <div className="dec:absolute dec:top-0 dec:left-0 dec:flex dec:size-10 dec:items-center dec:justify-center dec:rounded-lg dec:bg-indigo-600">
+                      <feature.icon aria-hidden="true" className="dec:size-6 dec:text-white" />
+                    </div>
+                    {feature.name}
+                  </dt>
+                  <dd className="dec:mt-2 dec:text-base/7 dec:text-gray-600">
+                    {feature.description}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
       </div>
     </div>
